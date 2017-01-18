@@ -1,0 +1,14 @@
+<ion-view view-title="Questionaire step 3 of 7" ng-controller="MyHomeCtrl">
+  <ion-content>
+  <h2>Step 1 from 7</h2>
+  <div class="question">
+    What type of building do you have?
+  </div>
+    <ion-radio ng-model="choice" ng-value="'A'">Choose A</ion-radio>
+    <ion-radio ng-model="choice" ng-value="'B'">Choose B</ion-radio>
+    <ion-radio ng-model="choice" ng-value="'C'">Choose C</ion-radio>
+    <p align="center">
+      <a class="button icon icon-right ion-chevron-right" ng-click="nextQ3()">Next</a>
+    </p>
+  </ion-content>
+</ion-view>

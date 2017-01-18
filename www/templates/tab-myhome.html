@@ -1,0 +1,64 @@
+<ion-view view-title="Myhome" ng-controller="ReadingCtrl as hCtrl"> <!--ng-controller="MyHomeCtrl as ctrl">-->
+  <ion-content class="padding">
+    <ion-refresher
+      pulling-icon="ion-android-refresh"
+      pulling-text=""
+      on-refresh="">
+    </ion-refresher>
+    <!--<img src="../img/home.png" />
+    <div align="center" on-hold="dealWithPicture()">
+    <img class="houseThumbnail" ng-src="{{ctrl.homeImage}}" style="width: 256px; height: 256px">
+      </div>-->
+    <div align="center" >
+      <!--<img class="houseThumbnail" ng-src="img/home.png" style="width: 256px; height: 256px" on-hold="" ng-click="popover.show($event)">-->
+      <img class="houseThumbnail" id="myHomePhoto" ng-src="img/home.png"  style="width: 256px; height: 256px" ><!-- -->
+    </div>
+    <p align="center">
+      <a class="button icon icon-right ion-chevron-right" ng-click="addImage()">Edit Photo</a>
+    </p>
+    <!--<p align="center">-->
+      <!--<a class="button icon icon-right ion-chevron-right" ng-click="popover.show($event)">Popover</a>-->
+    <!--</p>-->
+    <div class="address">
+      <p align="center">
+        29 Mabel Grove, West Bridgford, NG25GT
+      </p>
+    </div>
+
+    <p align="center">
+      Home saving status:
+    </p>
+    <div class="savingstatus">poor</div>
+    <p align="center">
+      <a class="button icon icon-right ion-chevron-right" href="#/tab/dash/game">Save energy game</a>
+    </p>
+
+      <div >
+      <div class="row header">
+        <div class="col">Room</div>
+        <div class="col">Temp [C]</div>
+        <div class="col">Humidity [%]</div>
+      </div>
+      <div class="row" ng-repeat="hr in hCtrl.homeReadings | filter: {active: trueVar}">
+        <div class="col">{{hr.room}}</div>
+        <div class="col">{{hr.temp}}</div>
+        <div class="col">{{hr.humid}}</div>
+      </div>
+    </div>
+  {{homeReadings}}
+
+
+<!--    <p>
+      Remourban is a major Future Cities demonstrator Project, supported by a major EU Horizon 2020 investment (EU Lighthouse project scheme) for five years (2014-2019).
+    </p>
+    <p>
+      Find out more on <a href="http://www.remourban.eu/" target="_blank">our site.</a>.
+    </p>-->
+   <!-- <p>
+    Right now we invite you to play energy saving game!
+    </p>
+    <p align="center">
+      <a href="" target="_blank">Play</a>
+    </p>-->
+  </ion-content>
+</ion-view>

@@ -1,0 +1,57 @@
+/* Empty. Add your own CSS if you like */
+.houseThumbnail img {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  max-height: 100%;
+  max-width: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.address
+{
+  font-size: smaller;
+}
+
+.savingstatus
+{
+  text-align: center;
+  color: coral;
+}
+
+.header .col {
+  background-color:lightgrey;
+}
+
+.col {
+  border: solid 0px grey;
+  border-bottom-style: none;
+  border-right-style: none;
+  column-width: auto;
+  -moz-column-width: auto;
+  -webkit-column-width: auto;
+}
+/*.col:first-child {*/
+  /*column-width: 8px;*/
+  /*align-content: center;*/
+/*}*/
+.col:first-child {
+  width: 10%;
+}
+.col:last-child {
+  border-right: solid 0px grey;
+}
+
+.row:last-child .col {
+  border-bottom: solid 0px grey;
+}
+.row:nth-child(2n+3) {
+  background-color: #e4e4e4;
+}
+
+.floated_img
+{
+  float: left;
+}

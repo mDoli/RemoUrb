@@ -1,0 +1,22 @@
+<ion-view view-title="Questionaire step 2 of 7" ng-controller="MyHomeCtrl">
+  <ion-content>
+  <h2>Step 2 of 7</h2>
+  <div class="question">
+    In which rooms are your sensors installed?
+  </div>
+    <div class="list">
+
+      <ion-checkbox ng-repeat="item in roomList"
+                    ng-model="item.checked"
+                    ng-checked="item.checked">
+        {{ item.text }}
+      </ion-checkbox>
+    </div>
+      <!--<div class="item">-->
+        <!--<pre ng-bind="roomList | json"></pre>-->
+      <!--</div>-->
+    <p align="center">
+      <a class="button icon icon-right ion-chevron-right" ng-click="nextQ2()">Next</a>
+    </p>
+  </ion-content>
+</ion-view>

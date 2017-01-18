@@ -1,0 +1,43 @@
+<ion-view view-title="Leaderboard" ng-controller="LeaderboardCtrl as ctrl">
+  <ion-content>
+    <ion-refresher
+      pulling-icon="ion-android-refresh"
+      pulling-text=""
+      on-refresh="refreshData()">
+    </ion-refresher>
+    <div class="button-bar">
+      <button class="button button-light button-android" ng-class="{ 'button-positive': lbType == 'neighborhood' }" ng-click="setLbType('neighborhood')">
+        My neighborhood
+      </button>
+      <button class="button button-light button-android" ng-class="{ 'button-positive': lbType == 'town' }" ng-click="setLbType('town')">
+        My town
+      </button>
+    </div>
+
+    <!--<div class="padding" align="center">-->
+    <!--<button class="button button-primary" ng-model="buttonNeighborhood" ng-click="buttonNeighborhood.clicked=!buttonNeighborhood.clicked; buttonTown.clicked=!buttonNeighborhood.clicked" ng-class="buttonNeighborhood.clicked?'button-positive':'button-stable'">-->
+    <!--My neighborhood-->
+  <!--</button>-->
+    <!--<button class="button button-primary" ng-model="buttonTown" ng-click="buttonTown.clicked=!buttonTown.clicked; buttonNeighborhood.clicked=!buttonNeighborhood.clicked" ng-class="buttonTown.clicked?'button-positive':'button-stable'">-->
+      <!--My town-->
+    <!--</button>-->
+    <!--</div>-->
+    <div class="row header">
+      <div class="col">No.</div>
+      <div class="col">Name</div>
+      <div class="col">Points</div>
+    </div>
+    <div class="row" ng-repeat="data in ctrl.data track by $index">
+      <div class="col">{{$index+1}}</div>
+      <div class="col">{{data.name}}</div>
+      <div class="col">{{data.points}}</div>
+      <!--<div class="col">{{data.account}}</div>
+      <div class="col"><button class="button" ng-click="ctrl.add($index)">Add</button></div>-->
+    </div>
+
+    <p align="center">
+      <a class="button icon icon-right ion-chevron-right" ng-click="refreshData()">Refresh</a>
+    </p>
+    Data: {{ctrl.data}}
+  </ion-content>
+</ion-view>

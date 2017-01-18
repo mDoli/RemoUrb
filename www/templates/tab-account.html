@@ -1,0 +1,29 @@
+<ion-view view-title="My account" ng-controller="AccountCtrl as ctrl">
+  <ion-content>
+    <ion-list>
+      <ion-toggle ng-repeat="item in settingsList"
+                  ng-model="item.checked"
+                  ng-checked="item.checked">
+        {{ item.text }}
+      </ion-toggle>
+      <label class="item item-input item-select">
+        <div class="input-label" translate="Language">
+          Language
+        </div>
+        <select ng-model="languagesFilter.shortcut" >
+            <option
+              ng-repeat="lng in languages"
+              ng-selected="{{lng.shortcut == languagesFilter.shortcut}}"
+              value="{{lng.shortcut}}">
+              {{lng.name}}
+            </option>
+        </select>
+      </label>
+      <div class="listTitle">
+        Configuration
+      </div>
+      {{settingsList}}
+
+    </ion-list>
+  </ion-content>
+</ion-view>

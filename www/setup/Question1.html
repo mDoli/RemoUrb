@@ -1,0 +1,16 @@
+<ion-view view-title="Questionaire step 1 of 7" ng-controller="MyHomeCtrl">
+  <ion-content>
+  <h2>Step 1 of 7</h2>
+  <div class="question">
+    What type of building do you have?
+  </div>
+    <ion-radio ng-model="choice" ng-value="'A'"><img class="houseThumbnail" id="VictorianTerraced" ng-src="img/victorian-terraced.jpg"  style="width: 200px; height: 200px" ><br><!-- -->
+      Victorian terraced</ion-radio>
+    <ion-radio ng-model="choice" ng-value="'B'"><img class="houseThumbnail" id="VictorianDetached" ng-src="img/victorian-detached.jpg"  style="width: 200px; height: 200px" ><br>Victorian detached</ion-radio>
+    <ion-radio ng-model="choice" ng-value="'C'"><img class="houseThumbnail" id="TreeHouse" ng-src="img/tree-house.jpg"  style="width: 200px; height: 200px" ><br>Tree house</ion-radio>
+    <ion-radio ng-model="choice" ng-value="'D'"><img class="houseThumbnail" id="BayAndGable" ng-src="img/bay-and-gable.jpg"  style="width: 200px; height: 200px" ><br>Bay and gable</ion-radio>
+    <p align="center">
+      <a class="button icon icon-right ion-chevron-right" ng-click="nextQ1()">Next</a>
+    </p>
+  </ion-content>
+</ion-view>
