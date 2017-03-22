@@ -1,16 +1,53 @@
-<ion-view view-title="Questionaire step 1 of 7" ng-controller="MyHomeCtrl">
+<ion-view view-title="Customize your home" ng-controller="MyHomeCtrl" id="questionaireView">
   <ion-content>
-  <h2>Step 1 of 7</h2>
-  <div class="question">
-    What type of building do you have?
-  </div>
-    <ion-radio ng-model="choice" ng-value="'A'"><img class="houseThumbnail" id="VictorianTerraced" ng-src="img/victorian-terraced.jpg"  style="width: 200px; height: 200px" ><br><!-- -->
-      Victorian terraced</ion-radio>
-    <ion-radio ng-model="choice" ng-value="'B'"><img class="houseThumbnail" id="VictorianDetached" ng-src="img/victorian-detached.jpg"  style="width: 200px; height: 200px" ><br>Victorian detached</ion-radio>
-    <ion-radio ng-model="choice" ng-value="'C'"><img class="houseThumbnail" id="TreeHouse" ng-src="img/tree-house.jpg"  style="width: 200px; height: 200px" ><br>Tree house</ion-radio>
-    <ion-radio ng-model="choice" ng-value="'D'"><img class="houseThumbnail" id="BayAndGable" ng-src="img/bay-and-gable.jpg"  style="width: 200px; height: 200px" ><br>Bay and gable</ion-radio>
-    <p align="center">
-      <a class="button icon icon-right ion-chevron-right" ng-click="nextQ1()">Next</a>
-    </p>
+    <div class="question1" id="question1">
+      <h2>Step 1 of 7</h2>
+      <div class="question">
+        What type of building do you have?
+      </div>
+      <ion-radio ng-model="choice" ng-value="'A'"><img class="houseThumbnail" id="VictorianTerraced" ng-src="img/victorian-terraced.jpg"  style="width: 200px; height: 200px" ><br><!-- -->
+        Victorian terraced</ion-radio>
+      <ion-radio ng-model="choice" ng-value="'B'"><img class="houseThumbnail" id="VictorianDetached" ng-src="img/victorian-detached.jpg"  style="width: 200px; height: 200px" ><br>Victorian detached</ion-radio>
+      <ion-radio ng-model="choice" ng-value="'C'"><img class="houseThumbnail" id="TreeHouse" ng-src="img/tree-house.jpg"  style="width: 200px; height: 200px" ><br>Tree house</ion-radio>
+      <ion-radio ng-model="choice" ng-value="'D'"><img class="houseThumbnail" id="BayAndGable" ng-src="img/bay-and-gable.jpg"  style="width: 200px; height: 200px" ><br>Bay and gable</ion-radio>
+      <p align="center">
+        <a class="button icon icon-right ion-chevron-right" ng-click="nextQ1()">Next</a>
+      </p>
+      {{document.getElementById("question1").style.visibility}}
+      {{document.getElementById("question2").style.visibility}}
+    </div>
+    <div class="question2" id="question2">
+      <h2>Step 2 of 7</h2>
+      <div class="question">
+        In which rooms are your sensors installed?
+      </div>
+      <div class="list">
+        <!--<ion-checkbox ng-repeat="item in roomList"-->
+        <!--ng-model="item.checked"-->
+        <!--ng-checked="item.checked">-->
+        <!--{{ item.text }}-->
+        <!--</ion-checkbox>-->
+        <ion-checkbox ng-repeat="item in homeReadings"
+                      ng-model="item.active"
+                      ng-checked="item.active">
+          {{ item.room }}
+        </ion-checkbox>
+      </div>
+      {{homeReadings}}
+      <p align="center">
+        <a class="button icon icon-right ion-chevron-right" ng-click="nextQ2()">Next</a>
+      </p>
+    </div>
+    <div class="question3" id="question3">
+      <h2>Step 3 from 7</h2>
+      <div class="question">
+        What are the dimensions of your bedroom?
+      </div>
+      <ion-radio ng-model="choice3" ng-value="'A'">Default (10'1.5" H x 9'5" W)</ion-radio>
+      <ion-radio ng-model="choice3" ng-value="'B'">Other</ion-radio>
+      <p align="center">
+        <a class="button icon icon-right ion-chevron-right" ng-click="nextQ3()">Next</a>
+      </p>
+    </div>
   </ion-content>
 </ion-view>

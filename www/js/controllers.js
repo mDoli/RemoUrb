@@ -28,54 +28,54 @@ angular.module('starter.controllers', ['ionic']) //, 'ngCordova'
 
     ctrl.dataNeighborhood = [
       {
-        no: 1,
+        id: 1,
         name: "James Brown",
         points: 2030
       },
       {
-        no: 2,
+        id: 2,
         name: "Charles Franklin",
         points: 1922
       },
       {
         no: 3,
         name: "Me",
-        points: 1807
+        points: 1806
       },
       {
-        no: 4,
+        id: 4,
         name: "Greta Ellis",
         points: 1799
       }
     ];
     ctrl.dataTown = [
       {
-        no: 1,
+        id: 1,
         name: "West Bridgford (me)",
         points: 10588
       },
       {
-        no: 2,
+        id: 2,
         name: "Clifton",
         points: 10220
       },
       {
-        no: 3,
+        id: 3,
         name: "Hyson Green",
         points: 9034
       },
       {
-        no: 4,
+        id: 4,
         name: "St Anns",
         points: 7753
       },
       {
-        no: 5,
+        id: 5,
         name: "Lace Market",
         points: 5138
       },
       {
-        no: 6,
+        id: 6,
         name: "Lenton",
         points: 2067
       }
@@ -97,7 +97,7 @@ angular.module('starter.controllers', ['ionic']) //, 'ngCordova'
     }
     $http.post('http://127.0.0.1:8080/remourban/getleaderboardpdo.php')
       .success(function(response) {
-        $scope.dataNeighborhood = response.data;
+        ctrl.dataNeighborhood = response.data;
         $ionicPopup.alert({
           title: 'Done',
           template: 'Content refreshed'
@@ -107,7 +107,7 @@ angular.module('starter.controllers', ['ionic']) //, 'ngCordova'
         $scope.httpError = { message: error, status: status};
         $ionicPopup.alert({
           title: 'Error',
-          template: 'Error message: ' + $scope.httpError.message + '<br>Error code: ' + $scope.httpError.status
+          template: 'Database not connected. <br />' + 'Error message: ' + $scope.httpError.message + '<br>Error code: ' + $scope.httpError.status
         });
         console.log($scope.httpError.status);
       })
@@ -115,7 +115,10 @@ angular.module('starter.controllers', ['ionic']) //, 'ngCordova'
     $scope.refreshData = function() {
       $http.post('http://127.0.0.1:8080/remourban/getleaderboardpdo.php')
         .success(function(response) {
-          $scope.dataNeighborhood = JSON.parse(response.data);
+          console.log("\n\n\n");
+          console.log(response);
+          console.log("\n\n\n");
+          $scope.dataNeighborhood = response.data;
           $ionicPopup.alert({
             title: 'Done',
             template: 'Content refreshed'
@@ -136,10 +139,10 @@ angular.module('starter.controllers', ['ionic']) //, 'ngCordova'
 
   })
 
-  .controller('AccountCtrl', function($scope) {
+  .controller('AccountCtrl', function($scope, $translate) {
     $scope.settingsList = [
-      { text: "Autorefreshing", checked: true },
-      { text: "Enable popups", checked: true }
+      { text: "Autorefreshing", translate_name: "AUTOREFRESHING", checked: true },
+      { text: "Enable popups", translate_name: "ENABLE_POPUPS", checked: true }
     ];
    $scope.stories = [
      {
@@ -172,40 +175,9 @@ angular.module('starter.controllers', ['ionic']) //, 'ngCordova'
       name: "English",
       shortcut: "en"
     }
-  })
-
-  .controller('ReadingCtrl', function($scope) {
-
-    var ctrl = this;
-
-    //ctrl.add = add;
-    ctrl.homeReadings = [
-      {
-        room: "Living room",
-        temp: 21.5,
-        humid: 33
-      },
-      {
-        room: "Kitchen",
-        temp: 21,
-        humid: 54
-      },
-      {
-        room: "Bedroom",
-        temp: 20,
-        humid: 1807
-      },
-      {
-        room: "Bathroom",
-        temp: 20.5,
-        humid: 77
-      }
-    ]
-
-    ////////
-    // function add(index) {
-    //   window.alert("Added: " + index);
-    // }
+    $scope.changeLanguage = function(key){
+      $translate.use(key);
+    };
   })
 
   .controller('LanguageCtrl', function($scope, $http) {
@@ -232,95 +204,147 @@ angular.module('starter.controllers', ['ionic']) //, 'ngCordova'
     ]
   })
 
-.controller('MyHomeCtrl', function($scope, $cordovaCamera, $cordovaFile, $ionicPopup, $ionicPopover) {
- // 1
- $scope.images = [];
- $scope.homeImage = "../img/home.png";
- document.getElementById("myHomePhoto").src= homeImage;
+  // .controller('ReadingCtrl', function($scope) {
+  //
+  //   var ctrl = this;
+  //
+  //   //ctrl.add = add;
+  //   ctrl.homeReadings = [
+  //     {
+  //       room: "Bathroom",
+  //       temp: 20.5,
+  //       humid: 81,
+  //       active: true
+  //     },
+  //     {
+  //       room: "Bedroom",
+  //       temp: 20,
+  //       humid: 53,
+  //       active: true
+  //     },
+  //     {
+  //       room: "Bedroom (2nd)",
+  //       temp: 20.5,
+  //       humid: 49,
+  //       active: false
+  //     },
+  //     {
+  //       room: "Kitchen",
+  //       temp: 21,
+  //       humid: 61,
+  //       active: true
+  //     },
+  //     {
+  //       room: "Living room",
+  //       temp: 21.5,
+  //       humid: 50,
+  //       active: true
+  //     },
+  //     {
+  //       room: "Other",
+  //       temp: 21.5,
+  //       humid: 53,
+  //       active: true
+  //     }
+  //   ];
+  //   $scope.homeImage = "../img/home.png";
+  //
+  //   ////////
+  //   // function add(index) {
+  //   //   window.alert("Added: " + index);
+  //   // }
+  // })
 
- $scope.addImage = function() {
- // 2
-   var options = {
-   destinationType : Camera.DestinationType.FILE_URI,
-   sourceType : Camera.PictureSourceType.CAMERA, // Camera.PictureSourceType.PHOTOLIBRARY
-   allowEdit : false,
-   encodingType: Camera.EncodingType.JPEG,
-   popoverOptions: CameraPopoverOptions,
- };
+.controller('MyHomeCtrl', function($scope, $cordovaCamera, $cordovaFile, $ionicPopup, $state, $ionicPopover) {
+ // // 1
+ // $scope.images = [];
+ // $scope.homeImage = "../img/home.png";
+ // document.getElementById("myHomePhoto").src= homeImage;
+ //
+ // $scope.addImage = function() {
+ // // 2
+ //   var options = {
+ //   destinationType : Camera.DestinationType.FILE_URI,
+ //   sourceType : Camera.PictureSourceType.CAMERA, // Camera.PictureSourceType.PHOTOLIBRARY
+ //   allowEdit : false,
+ //   encodingType: Camera.EncodingType.JPEG,
+ //   popoverOptions: CameraPopoverOptions,
+ // };
+ //
+ // // 3
+ // $cordovaCamera.getPicture(options).then(function(imageData) {
+ //
+ // // 4
+ // onImageSuccess(imageData);
+ //
+ // function onImageSuccess(fileURI) {
+ //  createFileEntry(fileURI);
+ // }
+ //
+ // function createFileEntry(fileURI) {
+ //  window.resolveLocalFileSystemURL(fileURI, copyFile, fail);
+ // }
+ //
+ // // 5
+ // function copyFile(fileEntry) {
+ //   var name = fileEntry.fullPath.substr(fileEntry.fullPath.lastIndexOf('/') + 1);
+ //   var newName = makeid() + name;
+ //
+ //   window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(fileSystem2) {
+ //     fileEntry.copyTo(
+ //       fileSystem2,
+ //       newName,
+ //       onCopySuccess,
+ //       fail
+ //       );
+ //     },
+ //     fail);
+ // }
+ //
+ // // 6
+ // function onCopySuccess(entry) {
+ //   $scope.$apply(function () {
+ //     $scope.images.clearAll();
+ //     $scope.images.push(entry.nativeURL);
+ //     document.getElementById("myHomePhoto").src = entry.nativeURL;
+ //   });
+ // }
+ //
+ // function fail(error) {
+ //  console.log("fail: " + error.code);
+ // }
+ //
+ // function makeid() {
+ //   var text = "";
+ //   var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+ //
+ //   for (var i=0; i < 5; i++) {
+ //    text += possible.charAt(Math.floor(Math.random() * possible.length));
+ //   }
+ //   return text;
+ // }
+ //
+ // }, function(err) {
+ //  console.log(err);
+ // });
+ // }
+ //
+ // $scope.urlForImage = function(imageName) {
+ //   var name = imageName.substr(imageName.lastIndexOf('/') + 1);
+ //   var trueOrigin = cordova.file.dataDirectory + name;
+ //   return trueOrigin;
+ // }
+ //
+ // $scope.dealWithPicture = function(){
+ //  alert("hold on detected");
+ // }
+ //
+ //  $ionicPopover.fromTemplateUrl('templates/popover.html', {
+ //    scope: $scope,
+ //  }).then(function(popover) {
+ //    $scope.popover = popover;
+ //  });
 
- // 3
- $cordovaCamera.getPicture(options).then(function(imageData) {
-
- // 4
- onImageSuccess(imageData);
-
- function onImageSuccess(fileURI) {
-  createFileEntry(fileURI);
- }
-
- function createFileEntry(fileURI) {
-  window.resolveLocalFileSystemURL(fileURI, copyFile, fail);
- }
-
- // 5
- function copyFile(fileEntry) {
-   var name = fileEntry.fullPath.substr(fileEntry.fullPath.lastIndexOf('/') + 1);
-   var newName = makeid() + name;
-
-   window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(fileSystem2) {
-     fileEntry.copyTo(
-       fileSystem2,
-       newName,
-       onCopySuccess,
-       fail
-       );
-     },
-     fail);
- }
-
- // 6
- function onCopySuccess(entry) {
-   $scope.$apply(function () {
-     $scope.images.clearAll();
-     $scope.images.push(entry.nativeURL);
-     document.getElementById("myHomePhoto").src = entry.nativeURL;
-   });
- }
-
- function fail(error) {
-  console.log("fail: " + error.code);
- }
-
- function makeid() {
-   var text = "";
-   var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-   for (var i=0; i < 5; i++) {
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
-   }
-   return text;
- }
-
- }, function(err) {
-  console.log(err);
- });
- }
-
- $scope.urlForImage = function(imageName) {
-   var name = imageName.substr(imageName.lastIndexOf('/') + 1);
-   var trueOrigin = cordova.file.dataDirectory + name;
-   return trueOrigin;
- }
-
- $scope.dealWithPicture = function(){
-  alert("hold on detected");
- }
-
-  $ionicPopover.fromTemplateUrl('templates/popover.html', {
-    scope: $scope,
-  }).then(function(popover) {
-    $scope.popover = popover;
-  });
   $scope.trueVar = true;
   var ctrl = this;
   ctrl.homeReadings = [
@@ -357,35 +381,81 @@ angular.module('starter.controllers', ['ionic']) //, 'ngCordova'
     {
       room: "Other",
       temp: 21.5,
-      humid: 50,
-      active: false
+      humid: 53,
+      active: true
     }
   ];
  //})
 
 //.controller('QuestionaireControl', function($scope, $ionicPopup) {
 
-    $scope.roomList = [
-      { text: "Bathroom", checked: false },
-      { text: "Bedroom", checked: false },
-      { text: "Bathroom (2nd)", checked: false },
-      { text: "Kitchen", checked: false },
-      { text: "Living room", checked: false },
-      { text: "Other", checked: false }
-    ];
+  // $scope.roomList = [
+  //   { text: "Bathroom", checked: false },
+  //   { text: "Bedroom", checked: false },
+  //   { text: "Bathroom (2nd)", checked: false },
+  //   { text: "Kitchen", checked: false },
+  //   { text: "Living room", checked: false },
+  //   { text: "Other", checked: false }
+  // ];
 
+  $scope.doConfig = function(){
+    var confirmPopup = $ionicPopup.confirm({
+      title: 'No home data',
+      template: 'Do you want to personalize configuration to your home?'
+    });
+    confirmPopup.then(function(res) {
+      if(res) {
+        console.log('I am starting the configuration');
+      } else {
+        console.log('I am quitting');
+      }
+    });
+  }
+  var q1 = document.getElementById("question1");
+  var q2 = document.getElementById("question2");
+  var q3 = document.getElementById("question3");
+  var vw = document.getElementById("questionaireView");
   $scope.nextQ1 = function(){
 
-    $ionicPopup.alert({
-      title: 'Done',
-      template: 'I am switching to Q2'
-    });
+    //$ionicPopup.alert({
+    //   title: 'Done',
+    //   template: 'I am switching to Q2' + document.getElementById("question1").style.visibility
+    // });
     $state.go('configQ2');
+    q2.style.visibility = "hidden";
+    q3.style.visibility = "visible";
   }
   $scope.nextQ2 = function(){
-    $state.go
+    q1.style.visibility = "hidden";
+    q2.style.visibility = "visible";
+   // $state.go
   }
   $scope.nextQ3 = function(){
-    $state.go
+   // $state.go
   }
+
+  $scope.takePicture = function () {
+
+    var options = {
+      quality: 50,
+      destinationType: Camera.DestinationType.DATA_URL,
+      sourceType: Camera.PictureSourceType.CAMERA,
+      allowEdit: true,
+      encodingType: Camera.EncodingType.JPEG,
+      targetWidth: 100,
+      targetHeight: 100,
+      popoverOptions: CameraPopoverOptions,
+      saveToPhotoAlbum: false,
+      correctOrientation:true
+    };
+
+    $cordovaCamera.getPicture(options).then(function(imageData) {
+      //var image = document.getElementById('myImage');
+      $scope.homePhoto = "data:image/jpeg;base64," + imageData;
+    }, function(err) {
+      // error
+    });
+
+  }
+
 });

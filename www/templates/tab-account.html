@@ -3,13 +3,12 @@
     <ion-list>
       <ion-toggle ng-repeat="item in settingsList"
                   ng-model="item.checked"
-                  ng-checked="item.checked">
-        {{ item.text }}
+                  ng-checked="item.checked"
+                  translate="{{item.translate_name}}">
+asd
       </ion-toggle>
       <label class="item item-input item-select">
-        <div class="input-label" translate="Language">
-          Language
-        </div>
+        <div class="input-label" translate="LANGUAGE"></div>
         <select ng-model="languagesFilter.shortcut" >
             <option
               ng-repeat="lng in languages"
@@ -19,11 +18,15 @@
             </option>
         </select>
       </label>
-      <div class="listTitle">
-        Configuration
-      </div>
-      {{settingsList}}
+      <!--<div class="listTitle" translate="CONFIGURATION"></div>
+      {{settingsList}}-->
 
     </ion-list>
+    <ul>
+      <li translate="QUESTION_WHAT_LANGUAGE"></li>
+      <a class="button" ng-click="changeLanguage('en')" translate="BUTTON_LANG_EN"></a>
+      <a class="button" ng-click="changeLanguage('es')" translate="BUTTON_LANG_ES"></a>
+      <a class="button" ng-click="changeLanguage('pl')" translate="BUTTON_LANG_PL"></a>
+    </ul>
   </ion-content>
 </ion-view>

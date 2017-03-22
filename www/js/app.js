@@ -5,9 +5,9 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services', 'pascalprecht.translate'])
 
-  .run(function($ionicPlatform) {
+  .run(function($ionicPlatform, $ionicPopup) {
     $ionicPlatform.ready(function() {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -20,15 +20,17 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         // org.apache.cordova.statusbar required
         StatusBar.styleDefault();
       }
+      console.log('Run');
     });
   })
 
-  .config(function($stateProvider, $urlRouterProvider) {
+  .config(function($stateProvider, $urlRouterProvider, $urlMatcherFactoryProvider, $translateProvider) {
 
     // Ionic uses AngularUI Router which uses the concept of states
     // Learn more here: https://github.com/angular-ui/ui-router
     // Set up the various states which the app can be in.
     // Each state's controller can be found in controllers.js
+
     $stateProvider
 
     // setup an abstract state for the tabs directive
@@ -60,6 +62,16 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
           }
         }
       })
+      // .state('config1', {
+      //   url: '/config',
+      //   abstract: true,
+      //   views: {
+      //     'config': {
+      //       //templateUrl: 'templates/view-game.html'
+      //       templateUrl: 'setup/Question1.html'
+      //     }
+      //   }
+      // })
 
       .state('tab.chats', {
         url: '/chats',
@@ -96,7 +108,8 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
           'tab-myhome': {
             //templateUrl: 'templates/view-game.html'
             templateUrl: 'setup/Question1.html',
-            controller: 'QuestionaireControl'
+            //controller: 'QuestionaireControl'
+            controller: 'MyHomeCtrl'
           }
         }
       })
@@ -107,7 +120,8 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
           'tab-myhome': {
             //templateUrl: 'templates/view-game.html'
             templateUrl: 'setup/Question2.html',
-            controller: 'QuestionaireControl'
+            //controller: 'QuestionaireControl'
+            controller: 'MyHomeCtrl'
           }
         }
       })
@@ -118,40 +132,68 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
         'tab-myhome': {
           //templateUrl: 'templates/view-game.html'
           templateUrl: 'setup/Question3.html',
-          controller: 'QuestionaireControl'
+          //controller: 'QuestionaireControl'
+          controller: 'MyHomeCtrl'
         }
       }
     });
 
+    // $ionicPopup.show({
+    //   title: 'Configuration required',
+    //   template: 'Config now?',
+    //   buttons: [
+    //     {text: 'Yes',
+    //       ontap: function(){
+    //
+    //         $urlRouterProvider.otherwise('/dash/Q1');
+    //       }},
+    //     {text: 'Quit',
+    //       ontap: function(){
+    //         $urlRouterProvider.otherwise('/tab/dash');
+    //       }}
+    //   ]
+    // });
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/tab/dash');
+    $urlMatcherFactoryProvider.caseInsensitive(true);
 
-    //if (window.localStorage.getItem("configurationDone") == null)
-    //{
-      //$scope.showConfirm();
-      //do configuration
+    $translateProvider.fallbackLanguage('en');
+    $translateProvider.registerAvailableLanguageKeys(['en', 'es', 'pl'], {
+        'en_*':'en',
+        'es_*':'es',
+        'pl_*':'pl'
+      })
+    $translateProvider.translations('en', {
+      AUTOREFRESHING: "Autorefreshing",
+      BUTTON_LANG_EN: "english",
+      BUTTON_LANG_ES: "spanish",
+      BUTTON_LANG_PL: "polish",
+      CONFIGURATION: "Configuration",
+      ENABLE_POPUPS: "Enable popups",
+      LANGUAGE:"Language",
+      MY_ACCOUNT: "My account",
+      QUESTION_WHAT_LANGUAGE: "What is your language?"
+    });
+    $translateProvider.translations('es', {
+      BUTTON_LANG_EN: "inglés",
+      BUTTON_LANG_ES: "español",
+      BUTTON_LANG_PL: "polaco",
+      QUESTION_WHAT_LANGUAGE: "Á donde te vas?"
+    });
+    $translateProvider.translations('pl', {
+      AUTOREFRESHING: "Autoodświeżanie",
+      BUTTON_LANG_EN: "angielski",
+      BUTTON_LANG_ES: "hiszpański",
+      BUTTON_LANG_PL: "polski",
+      CONFIGURATION: "Konfiguracja",
+      ENABLE_POPUPS: "Powiadomienia",
+      LANGUAGE:"Język",
+      MY_ACCOUNT: "Moje konto",
+      QUESTION_WHAT_LANGUAGE: "Jaki jest Twój język?"
+    });
 
-    //}
-    // {
-    //
-    // } state.go
-    //obrazki do radiobutton
-
-    // A confirm dialog
-    // $scope.showConfirm = function() {
-    //   var confirmPopup = $ionicPopup.confirm({
-    //     title: 'Important information',
-    //     template: 'Obligatory configuration has not been carried out. Do you want to do it now?',
-    //     cancelText: 'Quit'
-    //   });
-    //   confirmPopup.then(function(res) {
-    //     if(res) {
-    //       console.log('Configuration started. ');
-    //     } else {
-    //       console.log('Configuration aborted. I am closing the application. ');
-    //     }
-    //   });
-    // };
+    $translateProvider.useSanitizeValueStrategy('escape');
+    $translateProvider.preferredLanguage('en');
 
   });

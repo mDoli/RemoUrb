@@ -55,3 +55,16 @@
 {
   float: left;
 }
+
+.question {}
+
+.question1{
+  visibility: visible;
+}
+
+.question2{
+  visibility: hidden;
+}
+.question3{
+  visibility: visible;
+}

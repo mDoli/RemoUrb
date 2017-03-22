@@ -1,4 +1,4 @@
-<ion-view view-title="Myhome" ng-controller="ReadingCtrl as hCtrl"> <!--ng-controller="MyHomeCtrl as ctrl">-->
+<ion-view view-title="My home" ng-controller="MyHomeCtrl as hCtrl"> <!--ng-controller="MyHomeCtrl as ctrl">-->
   <ion-content class="padding">
     <ion-refresher
       pulling-icon="ion-android-refresh"
@@ -9,12 +9,13 @@
     <div align="center" on-hold="dealWithPicture()">
     <img class="houseThumbnail" ng-src="{{ctrl.homeImage}}" style="width: 256px; height: 256px">
       </div>-->
-    <div align="center" >
-      <!--<img class="houseThumbnail" ng-src="img/home.png" style="width: 256px; height: 256px" on-hold="" ng-click="popover.show($event)">-->
-      <img class="houseThumbnail" id="myHomePhoto" ng-src="img/home.png"  style="width: 256px; height: 256px" ><!-- -->
+    <div align="center">
+      <!--<img class="houseThumbnail" ng-src="img/home.png" id="myHomePhoto" style="width: 256px; height: 256px" on-hold="" ng-click="popover.show($event)">-->
+      <img ng-show="homePhoto !== undefined" class="houseThumbnail" ng-src="{{homePhoto}}" style="width: 300px; height: 300px" ng-click="takePicture()"><!-- -->
+      <img ng-show="homePhoto === undefined" class="houseThumbnail" ng-src="http:\\placehold.it/300x300"  style="width: 300px; height: 300px" ng-click="takePicture()"><!-- -->
     </div>
     <p align="center">
-      <a class="button icon icon-right ion-chevron-right" ng-click="addImage()">Edit Photo</a>
+      <a class="button icon icon-right ion-chevron-right" ng-click="takePicture()">Take picture</a>
     </p>
     <!--<p align="center">-->
       <!--<a class="button icon icon-right ion-chevron-right" ng-click="popover.show($event)">Popover</a>-->
@@ -30,22 +31,24 @@
     </p>
     <div class="savingstatus">poor</div>
     <p align="center">
+      <!--<a class="button icon icon-right ion-chevron-right" href="#/tab/dash/game">Save energy game</a>-->
       <a class="button icon icon-right ion-chevron-right" href="#/tab/dash/game">Save energy game</a>
     </p>
 
-      <div >
+      <div>
       <div class="row header">
         <div class="col">Room</div>
         <div class="col">Temp [C]</div>
         <div class="col">Humidity [%]</div>
       </div>
-      <div class="row" ng-repeat="hr in hCtrl.homeReadings | filter: {active: trueVar}">
+        <div class="row" ng-repeat="hr in hCtrl.homeReadings | filter: {active: trueVar}">
+          <!--<div class="row" ng-repeat="hr in hCtrl.homeReadings">-->
         <div class="col">{{hr.room}}</div>
         <div class="col">{{hr.temp}}</div>
         <div class="col">{{hr.humid}}</div>
       </div>
     </div>
-  {{homeReadings}}
+  {{hCtrl.homeReadings}}
 
 
 <!--    <p>
