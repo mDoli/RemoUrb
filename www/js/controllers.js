@@ -95,7 +95,8 @@ angular.module('starter.controllers', ['ionic']) //, 'ngCordova'
         ctrl.data = ctrl.dataTown;
       }
     }
-    $http.post('http://127.0.0.1:8080/remourban/getleaderboardpdo.php')
+    // $http.post('http://127.0.0.1:8080/remourban/getleaderboardpdo.php')
+    $http.post('http://192.168.0.20:8080/remourban/getleaderboardpdo.php')
       .success(function(response) {
         ctrl.dataNeighborhood = response.data;
         $ionicPopup.alert({
@@ -437,16 +438,16 @@ angular.module('starter.controllers', ['ionic']) //, 'ngCordova'
   $scope.takePicture = function () {
 
     var options = {
-      quality: 50,
+      quality: 100,
       destinationType: Camera.DestinationType.DATA_URL,
       sourceType: Camera.PictureSourceType.CAMERA,
       allowEdit: true,
       encodingType: Camera.EncodingType.JPEG,
-      targetWidth: 100,
-      targetHeight: 100,
+      targetWidth: 300,
+      targetHeight: 300,
       popoverOptions: CameraPopoverOptions,
       saveToPhotoAlbum: false,
-      correctOrientation:true
+      correctOrientation: true
     };
 
     $cordovaCamera.getPicture(options).then(function(imageData) {
@@ -457,5 +458,35 @@ angular.module('starter.controllers', ['ionic']) //, 'ngCordova'
     });
 
   }
+
+  //chart
+  $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+  $scope.series = ['Series A', 'Series B'];
+  $scope.data = [
+    [65, 59, 80, 81, 56, 55, 40],
+    [28, 48, 40, 19, 86, 27, 90]
+  ];
+  $scope.onClick = function (points, evt) {
+    console.log(points, evt);
+  };
+  $scope.datasetOverride = [{ yAxisID: 'y-axis-1' }, { yAxisID: 'y-axis-2' }];
+  $scope.options = {
+    scales: {
+      yAxes: [
+        {
+          id: 'y-axis-1',
+          type: 'linear',
+          display: true,
+          position: 'left'
+        },
+        {
+          id: 'y-axis-2',
+          type: 'linear',
+          display: true,
+          position: 'right'
+        }
+      ]
+    }
+  };
 
 });

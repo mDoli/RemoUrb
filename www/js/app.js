@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services', 'pascalprecht.translate'])
+angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services', 'pascalprecht.translate', 'chart.js'])
 
   .run(function($ionicPlatform, $ionicPopup) {
     $ionicPlatform.ready(function() {
@@ -168,18 +168,48 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
       AUTOREFRESHING: "Autorefreshing",
       BUTTON_LANG_EN: "english",
       BUTTON_LANG_ES: "spanish",
+      BUTTON_LANG_FR: "french",
       BUTTON_LANG_PL: "polish",
       CONFIGURATION: "Configuration",
       ENABLE_POPUPS: "Enable popups",
-      LANGUAGE:"Language",
+      HOME_SAVING_STATUS: "Home saving status:",
+      LANGUAGE: "Language",
       MY_ACCOUNT: "My account",
-      QUESTION_WHAT_LANGUAGE: "What is your language?"
+      NUMBER_SHORTCUT: "No.",
+      NAME: "Name",
+      QUESTION_WHAT_LANGUAGE: "What is your language?",
+      POINTS: "Points"
     });
     $translateProvider.translations('es', {
+      AUTOREFRESHING: "Refrescante automática",
       BUTTON_LANG_EN: "inglés",
       BUTTON_LANG_ES: "español",
       BUTTON_LANG_PL: "polaco",
-      QUESTION_WHAT_LANGUAGE: "Á donde te vas?"
+      CONFIGURATION: "Configuración",
+      ENABLE_POPUPS: "Habilitar ventanas emergentes",
+      HOME_SAVING_STATUS: "Estado de ahorro para el hogar:",
+      LANGUAGE:"Idioma",
+      MY_ACCOUNT: "Mi cuenta",
+      NUMBER_SHORTCUT: "No.",
+      NAME: "No.",
+      QUESTION_WHAT_LANGUAGE: "¿A dónde vas?",
+      POINTS: "Puntos"
+    });
+    $translateProvider.translations('fr', {
+      AUTOREFRESHING: "Rafraîchissement automatique",
+      BUTTON_LANG_EN: "anglais",
+      BUTTON_LANG_ES: "espagnol",
+      BUTTON_LANG_FR: "français",
+      BUTTON_LANG_PL: "polonais",
+      CONFIGURATION: "Configuration",
+      ENABLE_POPUPS: "Activer les popups",
+      HOME_SAVING_STATUS: "État d'enregistrement de la maison:",
+      LANGUAGE:"Langua",
+      MY_ACCOUNT: "Mon compte",
+      NUMBER_SHORTCUT: "No.",
+      NAME: "Nom",
+      QUESTION_WHAT_LANGUAGE: "What is your language?",
+      POINTS: "Points"
     });
     $translateProvider.translations('pl', {
       AUTOREFRESHING: "Autoodświeżanie",
@@ -188,9 +218,13 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
       BUTTON_LANG_PL: "polski",
       CONFIGURATION: "Konfiguracja",
       ENABLE_POPUPS: "Powiadomienia",
+      HOME_SAVING_STATUS: "Domowy status oszczędzania:",
       LANGUAGE:"Język",
       MY_ACCOUNT: "Moje konto",
-      QUESTION_WHAT_LANGUAGE: "Jaki jest Twój język?"
+      NUMBER_SHORTCUT: "Nr",
+      NAME: "Nazwa",
+      QUESTION_WHAT_LANGUAGE: "Jaki jest Twój język?",
+      POINTS: "Punkty"
     });
 
     $translateProvider.useSanitizeValueStrategy('escape');
