@@ -3,13 +3,13 @@
     <ion-list>
       <ion-toggle ng-repeat="item in settingsList"
                   ng-model="item.checked"
-                  ng-checked="item.checked"
-                  translate="{{item.translate_name}}">
-asd
+                  ng-checked="item.checked">
+        <!--translate="{{item.translate_name}}"-->
+        {{item.name}}
       </ion-toggle>
       <label class="item item-input item-select">
         <div class="input-label" translate="LANGUAGE"></div>
-        <select ng-model="languagesFilter.shortcut" >
+        <select id="selectedLanguage" ng-model="languagesFilter.shortcut" ng-change="changeLanguage('en')">
             <option
               ng-repeat="lng in languages"
               ng-selected="{{lng.shortcut == languagesFilter.shortcut}}"
@@ -20,8 +20,22 @@ asd
       </label>
       <!--<div class="listTitle" translate="CONFIGURATION"></div>
       {{settingsList}}-->
-
+      <label class="item item-input">
+        <span class="input-label" translate="DB_ADDRESS"></span>
+        <input type="tel" id="DB_ADDRESS" ng-model="connection.dbAddress">
+      </label>
+      <label class="item item-input">
+        <span class="input-label" translate="DB_PORT"></span>
+        <input type="text" id="DB_PORT" ng-model="connection.dbPort">
+      </label>
+      <a class="button" ng-click="testConnection()" translate="TEST">TEST</a>
+      <!--<input type="text" ng-model="connection.dbAddress" translate="DB_ADDRESS" />-->
+      <!--<input type="text" ng-model="connection.dbPort" translate="DB_PORT" />-->
     </ion-list>
+    <p align="center">
+      <!--<a class="button icon icon-right ion-chevron-right" href="#/tab/dash/game">Save energy game</a>-->
+      <a class="button icon icon-right ion-chevron-right" href="#/tab/dash/game" translate="CONFIGURATION">Configuration</a>
+    </p>
     <ul>
       <li translate="QUESTION_WHAT_LANGUAGE"></li>
       <a class="button" ng-click="changeLanguage('en')" translate="BUTTON_LANG_EN"></a>

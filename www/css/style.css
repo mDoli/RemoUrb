@@ -1,24 +1,65 @@
 /* Empty. Add your own CSS if you like */
-.houseThumbnail img {
+.houseThumbnail {
   bottom: 0;
   left: 0;
   margin: auto;
-  max-height: 100%;
-  max-width: 100%;
-  position: absolute;
+  /*max-height: 100%;*/
+  /*max-width: 100%;*/
+  /*position: absolute;*/
   right: 0;
   top: 0;
+  float: left;
+  /*width: 60%;*/
+  width: 50%;
+
+  /*height: 50%;*/
+}
+.houseThumbnailQuestion {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  /*max-height: 100%;*/
+  /*max-width: 100%;*/
+  /*position: absolute;*/
+  right: 0;
+  top: 0;
+  float: left;
+  /*width: 60%;*/
+  width: 50%;
+
+  /*height: 50%;*/
+}
+.houseThumbnailQuestionText {
+  bottom: 0;
+  /*left: 0;*/
+  top: 5%;
+  margin: 20%;
+  width: 50%;
 }
 
 .address
 {
+  width: 40%;
   font-size: smaller;
+  float: right;
 }
 
-.savingstatus
+.homeSavingStatusText
 {
-  text-align: center;
+  /*text-align: center;*/
+  /*color: coral;*/
+  width: 40%;
+  font-size: smaller;
+  float: right;
+}
+
+.homeSavingStatus
+{
+  /*text-align: center;*/
   color: coral;
+  width: 40%;
+  /*font-size: smaller;*/
+  float: right;
 }
 
 .header .col {
@@ -63,7 +104,7 @@
 }
 
 .question2{
-  visibility: hidden;
+  visibility: visible;
 }
 .question3{
   visibility: visible;

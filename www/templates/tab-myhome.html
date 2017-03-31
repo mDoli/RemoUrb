@@ -9,42 +9,45 @@
     <div align="center" on-hold="dealWithPicture()">
     <img class="houseThumbnail" ng-src="{{ctrl.homeImage}}" style="width: 256px; height: 256px">
       </div>-->
-    <div align="center">
+    <div align="left">
       <!--<img class="houseThumbnail" ng-src="img/home.png" id="myHomePhoto" style="width: 256px; height: 256px" on-hold="" ng-click="popover.show($event)">-->
-      <img ng-show="homePhoto !== undefined" class="houseThumbnail" ng-src="{{homePhoto}}" style="width: 300px; height: 300px" on-hold="takePicture()"><!-- -->
-      <img ng-show="homePhoto === undefined" class="houseThumbnail" ng-src="img/home.png"  style="width: 300px; height: 300px" on-hold="takePicture()"><!-- -->
+      <img ng-show="homePhoto !== undefined" class="houseThumbnail" ng-src="{{homePhoto}}" on-hold="takePicture()"><!-- -->
+      <img ng-show="homePhoto === undefined" class="houseThumbnail" ng-src="img/home.png" on-hold="takePicture()" ng-click="takePicture()"><!-- -->
     </div>
-    <p align="center">
-      <a class="button icon icon-right ion-chevron-right" ng-click="takePicture()">Take picture</a>
-    </p>
+    <div class="address">
+        29 Mabel Grove, West Bridgford, NG25GT
+    </div>
+
+    <div class="homeSavingStatusText">
+      Saving status:
+      <div class="homeSavingStatus">poor</div>
+    </div>
+    <!--<p align="center">-->
+      <!--<a class="button icon icon-right ion-chevron-right" ng-click="takePicture()">Take picture</a>-->
+    <!--</p>-->
     <!--<p align="center">-->
       <!--<a class="button icon icon-right ion-chevron-right" ng-click="popover.show($event)">Popover</a>-->
     <!--</p>-->
-    <div class="address">
-      <p align="center">
-        29 Mabel Grove, West Bridgford, NG25GT
-      </p>
-    </div>
-
-    <p align="center">
-      Home saving status:
-    </p>
-    <div class="savingstatus">poor</div>
-    <p align="center">
-      <!--<a class="button icon icon-right ion-chevron-right" href="#/tab/dash/game">Save energy game</a>-->
-      <a class="button icon icon-right ion-chevron-right" href="#/tab/dash/game">Save energy game</a>
-    </p>
-    <canvas id="line" class="chart chart-line" chart-data="data"
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <div>
+    <canvas id="line" class="chart chart-bar" chart-data="data"
             chart-labels="labels" chart-series="series" chart-options="options"
             chart-dataset-override="datasetOverride" chart-click="onClick">
     </canvas>
-      <div>
+    </div>
+    <div>
       <div class="row header">
         <div class="col">Room</div>
         <div class="col">Temp [C]</div>
         <div class="col">Humidity [%]</div>
       </div>
-        <div class="row" ng-repeat="hr in hCtrl.homeReadings | filter: {active: trueVar}">
+        <div class="row" ng-repeat="hr in homeReadings | filter: {active: trueVar}">
           <!--<div class="row" ng-repeat="hr in hCtrl.homeReadings">-->
         <div class="col">{{hr.room}}</div>
         <div class="col">{{hr.temp}}</div>

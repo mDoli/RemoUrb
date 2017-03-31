@@ -15,10 +15,10 @@ angular.module('starter.controllers', ['ionic']) //, 'ngCordova'
     };
   })
 
-  .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-    $scope.chat = Chats.get($stateParams.chatId);
-  })
-  //document.getElementsById("buttonNeighborhood").click();
+  // .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
+  //   $scope.chat = Chats.get($stateParams.chatId);
+  // })
+  // //document.getElementsById("buttonNeighborhood").click();
 
   .controller('LeaderboardCtrl', function($scope, $http, $ionicPopup) {
 
@@ -26,7 +26,7 @@ angular.module('starter.controllers', ['ionic']) //, 'ngCordova'
     var neighborhood = "neighborhood";
     var town = "town";
 
-    ctrl.dataNeighborhood = [
+    $scope.dataNeighborhood = [
       {
         id: 1,
         name: "James Brown",
@@ -48,7 +48,7 @@ angular.module('starter.controllers', ['ionic']) //, 'ngCordova'
         points: 1799
       }
     ];
-    ctrl.dataTown = [
+    $scope.dataTown = [
       {
         id: 1,
         name: "West Bridgford (me)",
@@ -80,29 +80,42 @@ angular.module('starter.controllers', ['ionic']) //, 'ngCordova'
         points: 2067
       }
     ];
-    ctrl.data = ctrl.dataNeighborhood;
+    $scope.data = $scope.dataNeighborhood;
 
     $scope.lbType = 'neighborhood';
     $scope.setLbType = function(p) {
       $scope.lbType = p;
-      if(p == neighborhood)
+      $scope.update();
+      // if(p == neighborhood)
+      // {
+      //   $scope.data = $scope.dataNeighborhood;
+      //   $scope.refreshData;
+      // }
+      // else
+      // {
+      //   $scope.data = $scope.dataTown;
+      // }
+    };
+    $scope.update = function () {
+      if($scope.lbType == neighborhood)
       {
-        ctrl.data = ctrl.dataNeighborhood;
-        ctrl.refreshData;
+        $scope.data = $scope.dataNeighborhood;
       }
       else
       {
-        ctrl.data = ctrl.dataTown;
+        $scope.data = $scope.dataTown;
       }
-    }
-    // $http.post('http://127.0.0.1:8080/remourban/getleaderboardpdo.php')
-    $http.post('http://192.168.0.20:8080/remourban/getleaderboardpdo.php')
+    };
+
+    $http.post('http://127.0.0.1:8080/remourban/getleaderboardpdo.php')
+    //$http.post('http://192.168.0.20:8080/remourban/getleaderboardpdo.php')
       .success(function(response) {
-        ctrl.dataNeighborhood = response.data;
+        $scope.dataNeighborhood = response.data;
         $ionicPopup.alert({
           title: 'Done',
           template: 'Content refreshed'
         });
+        $scope.update();
       })
       .error(function(error, status){
         $scope.httpError = { message: error, status: status};
@@ -114,7 +127,10 @@ angular.module('starter.controllers', ['ionic']) //, 'ngCordova'
       })
 
     $scope.refreshData = function() {
-      $http.post('http://127.0.0.1:8080/remourban/getleaderboardpdo.php')
+      var dbAddress = document.getElementById("DB_ADDRESS").value;
+      var dbPort = document.getElementById("DB_PORT").value;
+      // $ionicPopup.alert({template: 'http://' + dbAddress + ':' + dbPort + '/remourban/getleaderboardpdo.php'});
+      $http.post('http://' + dbAddress + ':' + dbPort + '/remourban/getleaderboardpdo.php')
         .success(function(response) {
           console.log("\n\n\n");
           console.log(response);
@@ -124,6 +140,7 @@ angular.module('starter.controllers', ['ionic']) //, 'ngCordova'
             title: 'Done',
             template: 'Content refreshed'
           });
+          $scope.update();
         })
         .error(function(error, status){
           $scope.httpError = { message: error, status: status};
@@ -140,18 +157,14 @@ angular.module('starter.controllers', ['ionic']) //, 'ngCordova'
 
   })
 
-  .controller('AccountCtrl', function($scope, $translate) {
+  .controller('AccountCtrl', function($scope, $translate, $ionicPopup, $http) {
     $scope.settingsList = [
-      { text: "Autorefreshing", translate_name: "AUTOREFRESHING", checked: true },
-      { text: "Enable popups", translate_name: "ENABLE_POPUPS", checked: true }
+      { name: "Autorefreshing", translate_name: "AUTOREFRESHING", checked: true },
+      { name: "Enable popups", translate_name: "ENABLE_POPUPS", checked: true }
     ];
    $scope.stories = [
-     {
-       title: 'First St'
-     },
-     {
-       title: 'Second St'
-     }
+     { title: 'First St' },
+     { title: 'Second St' }
    ];
 
     $scope.languages = [
@@ -179,6 +192,39 @@ angular.module('starter.controllers', ['ionic']) //, 'ngCordova'
     $scope.changeLanguage = function(key){
       $translate.use(key);
     };
+    $scope.connection = {dbAddress: "127.0.0.1", dbPort: "8080"};
+
+    $scope.testConnection = function () {
+      ///
+      var dbAddress = document.getElementById("DB_ADDRESS").value;
+      var dbPort = document.getElementById("DB_PORT").value;
+      //$ionicPopup.alert({template: 'http://' + dbAddress + ':' + dbPort + '/remourban/getleaderboardpdo.php'});
+      $http.post('http://' + dbAddress + ':' + dbPort + '/remourban/getleaderboardpdo.php')
+        .success(function(response) {
+          console.log("\n\n\n");
+          console.log(response);
+          console.log("\n\n\n");
+          //$scope.dataNeighborhood = response.data;
+          $ionicPopup.alert({
+            title: 'Success',
+            template: 'Database connected'
+          });
+        })
+        .error(function(error, status){
+          $scope.httpError = { message: error, status: status};
+          $ionicPopup.alert({
+            title: 'Connection error',
+            template: 'Error message: ' + $scope.httpError.message + '<br>Error code: ' + $scope.httpError.status
+          });
+          //console.log($scope.httpError.status);
+        })
+      ///
+      console.log('asd');
+      // $ionicPopup.alert({
+      //   title: 'Database connection test',
+      //   template: 'Success'
+      // });
+    }
   })
 
   .controller('LanguageCtrl', function($scope, $http) {
@@ -348,43 +394,13 @@ angular.module('starter.controllers', ['ionic']) //, 'ngCordova'
 
   $scope.trueVar = true;
   var ctrl = this;
-  ctrl.homeReadings = [
-    {
-      room: "Bathroom",
-      temp: 20.5,
-      humid: 81,
-      active: true
-    },
-    {
-      room: "Bedroom",
-      temp: 20,
-      humid: 53,
-      active: true
-    },
-    {
-      room: "Bedroom (2nd)",
-      temp: 20.5,
-      humid: 49,
-      active: false
-    },
-    {
-      room: "Kitchen",
-      temp: 21,
-      humid: 61,
-      active: true
-    },
-    {
-      room: "Living room",
-      temp: 21.5,
-      humid: 50,
-      active: true
-    },
-    {
-      room: "Other",
-      temp: 21.5,
-      humid: 53,
-      active: true
-    }
+  $scope.homeReadings = [
+    { room: "Bathroom", temp: 20.5, humid: 81, active: true },
+    { room: "Bedroom", temp: 20, humid: 53, active: true },
+    { room: "Bedroom (2nd)", temp: 20.5, humid: 49, active: false },
+    { room: "Kitchen", temp: 21, humid: 61, active: true },
+    { room: "Living room", temp: 21.5, humid: 50, active: true },
+    { room: "Other", temp: 21.5, humid: 53, active: true }
   ];
  //})
 

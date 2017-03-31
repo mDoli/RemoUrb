@@ -1,4 +1,4 @@
-<ion-view view-title="Leaderboard" ng-controller="LeaderboardCtrl as ctrl">
+<ion-view view-title="Leaderboard" ng-controller="LeaderboardCtrl">
   <ion-content>
     <ion-refresher
       pulling-icon="ion-android-refresh"
@@ -27,18 +27,18 @@
       <div class="col" translate="NAME"></div>
       <div class="col" translate="POINTS"></div>
     </div>
-    <div class="row" ng-repeat="data in ctrl.data track by $index">
+    <div class="row" ng-repeat="dt in data | orderBy: 'points' : true track by $index">
       <div class="col">{{$index+1}}</div>
-      <div class="col">{{data.name}}</div>
-      <div class="col">{{data.points}}</div>
+      <div class="col">{{dt.name}}</div>
+      <div class="col">{{dt.points}}</div>
       <!--<div class="col">{{data.account}}</div>
       <div class="col"><button class="button" ng-click="ctrl.add($index)">Add</button></div>-->
     </div>
 
-    <p align="center">
-      <a class="button icon icon-right ion-chevron-right" ng-click="refreshData()">Refresh</a>
-    </p>
-    Data: {{ctrl.dataNeighborhood}}
-    Data: {{ctrl.data}}
+    <!--<p align="center">-->
+      <!--<a class="button icon icon-right ion-chevron-right" ng-click="refreshData()">Refresh</a>-->
+    <!--</p>-->
+    <!--Data: {{dataNeighborhood}}-->
+    <!--Data: {{data}}-->
   </ion-content>
 </ion-view>

@@ -171,6 +171,8 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
       BUTTON_LANG_FR: "french",
       BUTTON_LANG_PL: "polish",
       CONFIGURATION: "Configuration",
+      DB_ADDRESS: "Database address",
+      DB_PORT: "Database port",
       ENABLE_POPUPS: "Enable popups",
       HOME_SAVING_STATUS: "Home saving status:",
       LANGUAGE: "Language",
@@ -178,7 +180,8 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
       NUMBER_SHORTCUT: "No.",
       NAME: "Name",
       QUESTION_WHAT_LANGUAGE: "What is your language?",
-      POINTS: "Points"
+      POINTS: "Points",
+      TEST: "Test"
     });
     $translateProvider.translations('es', {
       AUTOREFRESHING: "Refrescante automática",
@@ -186,6 +189,8 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
       BUTTON_LANG_ES: "español",
       BUTTON_LANG_PL: "polaco",
       CONFIGURATION: "Configuración",
+      DB_ADDRESS: "Dirección de base de datos",
+      DB_PORT: "Puerto de base de datos",
       ENABLE_POPUPS: "Habilitar ventanas emergentes",
       HOME_SAVING_STATUS: "Estado de ahorro para el hogar:",
       LANGUAGE:"Idioma",
@@ -202,6 +207,8 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
       BUTTON_LANG_FR: "français",
       BUTTON_LANG_PL: "polonais",
       CONFIGURATION: "Configuration",
+      DB_ADDRESS: "Adresse de base de données",
+      DB_PORT: "Port de base de données",
       ENABLE_POPUPS: "Activer les popups",
       HOME_SAVING_STATUS: "État d'enregistrement de la maison:",
       LANGUAGE:"Langua",
@@ -217,6 +224,8 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
       BUTTON_LANG_ES: "hiszpański",
       BUTTON_LANG_PL: "polski",
       CONFIGURATION: "Konfiguracja",
+      DB_ADDRESS: "Adres bazy danych",
+      DB_PORT: "Port bazy danych",
       ENABLE_POPUPS: "Powiadomienia",
       HOME_SAVING_STATUS: "Domowy status oszczędzania:",
       LANGUAGE:"Język",
