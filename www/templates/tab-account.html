@@ -9,7 +9,8 @@
       </ion-toggle>
       <label class="item item-input item-select">
         <div class="input-label" translate="LANGUAGE"></div>
-        <select id="selectedLanguage" ng-model="languagesFilter.shortcut" ng-change="changeLanguage('en')">
+        <select id="selectedLanguage" ng-model="selectedLanguageModel" ng-change="updateLanguage()">
+          <!--ng-model="languagesFilter.shortcut"-->
             <option
               ng-repeat="lng in languages"
               ng-selected="{{lng.shortcut == languagesFilter.shortcut}}"
@@ -36,12 +37,12 @@
       <!--<a class="button icon icon-right ion-chevron-right" href="#/tab/dash/game">Save energy game</a>-->
       <a class="button icon icon-right ion-chevron-right" href="#/tab/dash/game" translate="CONFIGURATION">Configuration</a>
     </p>
-    <ul>
-      <li translate="QUESTION_WHAT_LANGUAGE"></li>
-      <a class="button" ng-click="changeLanguage('en')" translate="BUTTON_LANG_EN"></a>
-      <a class="button" ng-click="changeLanguage('es')" translate="BUTTON_LANG_ES"></a>
-      <a class="button" ng-click="changeLanguage('fr')" translate="BUTTON_LANG_FR"></a>
-      <a class="button" ng-click="changeLanguage('pl')" translate="BUTTON_LANG_PL"></a>
-    </ul>
+    <!--<ul>-->
+      <!--<li translate="QUESTION_WHAT_LANGUAGE"></li>-->
+      <!--<a class="button" ng-click="changeLanguage('en')" translate="BUTTON_LANG_EN"></a>-->
+      <!--<a class="button" ng-click="changeLanguage('es')" translate="BUTTON_LANG_ES"></a>-->
+      <!--<a class="button" ng-click="changeLanguage('fr')" translate="BUTTON_LANG_FR"></a>-->
+      <!--<a class="button" ng-click="changeLanguage('pl')" translate="BUTTON_LANG_PL"></a>-->
+    <!--</ul>-->
   </ion-content>
 </ion-view>

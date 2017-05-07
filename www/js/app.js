@@ -170,6 +170,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
       BUTTON_LANG_ES: "spanish",
       BUTTON_LANG_FR: "french",
       BUTTON_LANG_PL: "polish",
+      CHART_UNIT: "Chart unit",
       CONFIGURATION: "Configuration",
       DB_ADDRESS: "Database address",
       DB_PORT: "Database port",
@@ -181,6 +182,8 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
       NAME: "Name",
       QUESTION_WHAT_LANGUAGE: "What is your language?",
       POINTS: "Points",
+      SHOW_CONSUMPTION_BY: "Show consumption by",
+      SHOW_CONSUMPTION_IN: "Show consumption in",
       TEST: "Test"
     });
     $translateProvider.translations('es', {
@@ -198,7 +201,10 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
       NUMBER_SHORTCUT: "No.",
       NAME: "No.",
       QUESTION_WHAT_LANGUAGE: "¿A dónde vas?",
-      POINTS: "Puntos"
+      POINTS: "Puntos",
+      SHOW_CONSUMPTION_BY: "Mostrar el consumo por",
+      SHOW_CONSUMPTION_IN: "Mostrar el consumo en",
+      TEST: "Prueba"
     });
     $translateProvider.translations('fr', {
       AUTOREFRESHING: "Rafraîchissement automatique",
@@ -216,7 +222,10 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
       NUMBER_SHORTCUT: "No.",
       NAME: "Nom",
       QUESTION_WHAT_LANGUAGE: "What is your language?",
-      POINTS: "Points"
+      POINTS: "Points",
+      SHOW_CONSUMPTION_BY: "Montrer la consommation par",
+      SHOW_CONSUMPTION_IN: "Montrer la consommation dans",
+      TEST: "Test"
     });
     $translateProvider.translations('pl', {
       AUTOREFRESHING: "Autoodświeżanie",
@@ -233,7 +242,10 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
       NUMBER_SHORTCUT: "Nr",
       NAME: "Nazwa",
       QUESTION_WHAT_LANGUAGE: "Jaki jest Twój język?",
-      POINTS: "Punkty"
+      POINTS: "Punkty",
+      SHOW_CONSUMPTION_BY: "Pokaż zużycie przez",
+      SHOW_CONSUMPTION_IN: "Pokaż zużycie w",
+      TEST: "Test"
     });
 
     $translateProvider.useSanitizeValueStrategy('escape');

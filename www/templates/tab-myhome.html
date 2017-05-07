@@ -36,11 +36,46 @@
     <br />
     <br />
     <div>
-    <canvas id="line" class="chart chart-bar" chart-data="data"
-            chart-labels="labels" chart-series="series" chart-options="options"
-            chart-dataset-override="datasetOverride" chart-click="onClick">
-    </canvas>
+    <!--<canvas id="lineChart" class="chart chart-bar" chart-data="data"-->
+            <!--chart-labels="labels" chart-series="series" chart-options="options"-->
+            <!--chart-dataset-override="datasetOverride" chart-click="onClick">-->
+    <!--</canvas>-->
+      <canvas id="canvas"  />
     </div>
+    <label class="item item-input item-select">
+      <div class="input-label" translate="SHOW_CONSUMPTION_BY"></div>
+      <select id="chartUnitsX" ng-model="chartUnitsXModel" ng-change="updateChart()">
+        <option
+          ng-repeat="unit in chartUnitsX"
+          ng-selected="{{unit.name == chartUnitsX[0].name}}"
+          value="{{unit.name}}">
+          {{unit.name}}
+        </option>
+      </select>
+    </label>
+    <label class="item item-input item-select">
+      <div class="input-label" translate="SHOW_CONSUMPTION_IN"></div>
+      <select id="chartUnitsY" ng-model="chartUnitsYModel" ng-change="updateChart()">
+        <option
+          ng-repeat="unit in chartUnitsY"
+          ng-selected="{{unit.name == chartUnitsYFilter.name}}"
+          value="{{unit.name}}">
+          {{unit.name}}
+        </option>
+      </select>
+    </label>
+    <label class="item item-input item-select">
+      <div class="input-label" translate="SHOW_CONSUMPTION_BY"></div>
+      <select id="chartRooms" ng-model="chartRooms" ng-change="updateChart()">
+        <option
+          ng-repeat="aRoom in homeReadings"
+          ng-show="aRoom.active"
+          ng-selected="{{aRoom.room == homeReadings[0].room}}"
+          value="{{aRoom.room}}">
+          {{aRoom.room}}
+        </option>
+      </select>
+    </label>
     <div>
       <div class="row header">
         <div class="col">Room</div>

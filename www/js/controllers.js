@@ -168,13 +168,17 @@ angular.module('starter.controllers', ['ionic']) //, 'ngCordova'
    ];
 
     $scope.languages = [
-      {
-        name: "Deutsch",
-        shortcut: "de"
-      },
+      // {
+      //   name: "Deutsch",
+      //   shortcut: "de"
+      // },
       {
         name: "English",
         shortcut: "en"
+      },
+      {
+        name: "French",
+        shortcut: "fr"
       },
       {
         name: "Español",
@@ -184,14 +188,21 @@ angular.module('starter.controllers', ['ionic']) //, 'ngCordova'
         name: "Polski",
         shortcut: "pl"
       }
-    ]
+    ];
     $scope.languagesFilter = {
       name: "English",
       shortcut: "en"
-    }
+    };
+    $scope.selectedLanguageModel = 'English';
     $scope.changeLanguage = function(key){
       $translate.use(key);
     };
+
+    $scope.updateLanguage = function () {
+      // $ionicPopup.alert({template:selectedLanguage.name});
+      $scope.changeLanguage(selectedLanguage.value);
+    }
+
     $scope.connection = {dbAddress: "127.0.0.1", dbPort: "8080"};
 
     $scope.testConnection = function () {
@@ -452,7 +463,6 @@ angular.module('starter.controllers', ['ionic']) //, 'ngCordova'
   }
 
   $scope.takePicture = function () {
-
     var options = {
       quality: 100,
       destinationType: Camera.DestinationType.DATA_URL,
@@ -473,36 +483,133 @@ angular.module('starter.controllers', ['ionic']) //, 'ngCordova'
       // error
     });
 
-  }
-
-  //chart
-  $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-  $scope.series = ['Series A', 'Series B'];
-  $scope.data = [
-    [65, 59, 80, 81, 56, 55, 40],
-    [28, 48, 40, 19, 86, 27, 90]
-  ];
-  $scope.onClick = function (points, evt) {
-    console.log(points, evt);
   };
-  $scope.datasetOverride = [{ yAxisID: 'y-axis-1' }, { yAxisID: 'y-axis-2' }];
-  $scope.options = {
-    scales: {
-      yAxes: [
-        {
-          id: 'y-axis-1',
-          type: 'linear',
-          display: true,
-          position: 'left'
-        },
-        {
-          id: 'y-axis-2',
-          type: 'linear',
-          display: true,
-          position: 'right'
-        }
-      ]
+
+  // //chart
+  // $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+  // $scope.labelsWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  // $scope.series = ['Series A', 'Series B'];
+  // $scope.data = [
+  //   [65, 59, 80, 81, 56, 55, 30],
+  //   [28, 48, 40, 19, 86, 27, 90]
+  // ];
+  // $scope.onClick = function (points, evt) {
+  //   console.log(points, evt);
+  // };
+  // $scope.chartUnitsX = [ { name: "month", value: "m" }, { name: "day", value: "d" }, { name: "hour", value: "h" } ]; //unit of y axis of chart
+  // $scope.chartUnitsXFilter = { name: "month", value: "m" };
+  // document.getElementById("chartUnitsX").value = "month";
+  // $scope.chartUnitsY = [ { name: "Pound", value: "l" }, { name: "kWh", value: "kwh" } ]; //unit of y axis of chart
+  // $scope.chartUnitsYFilter = { name: "kWh", value: "kwh" };
+  // $scope.datasetOverride = [{ yAxisID: 'y-axis-1' }, { yAxisID: 'y-axis-2' }];
+  // $scope.options = {
+  //   scales: {
+  //     yAxes: [
+  //       {
+  //         id: 'y-axis-1',
+  //         type: 'linear',
+  //         display: true,
+  //         position: 'left'
+  //       },
+  //       {
+  //         id: 'y-axis-2',
+  //         type: 'linear',
+  //         display: true,
+  //         position: 'right'
+  //       }
+  //     ]
+  //   }
+  // };
+  //
+  // ///////////////////
+  // //var mychart;
+  // $scope.ctx;
+  // $scope.ctx = document.getElementById("lineChart").getContext("2d");
+  // $scope.mychart= new Chart($scope.ctx,
+  //   {
+  //     type: "line",
+  //     data: $scope.data
+  //   }).Line($scope.data, $scope.options);
+  //
+  // $scope.updateChart = function () {
+  //   console.log('I am updating chart.');
+  //   console.log(chartUnitsY.value);
+  //   console.log(chartUnitsX.value);
+  //   console.log(document.getElementsByTagName("canvas"));
+  //   //var canvas = document.getElementById('lineChart');
+  //
+  //   mychart.destroy();
+  //   //var ctx = document.getElementById("lineChart").getContext("2d");
+  //   mychart = new Chart($scope.ctx).Line($scope.data, $scope.options);
+  //   //canvas.update();
+  //
+  // }
+
+
+  $scope.chartUnitsX = [ { name: "month", value: "m" }, { name: "day", value: "d" }, { name: "hour", value: "h" } ]; //unit of y axis of chart
+  $scope.chartUnitsXFilter = $scope.chartUnitsX[0];
+  //document.getElementById("chartUnitsX").value = "month";
+  $scope.chartUnitsY = [ { name: "Pound", value: "l" }, { name: "kWh", value: "kwh" } ]; //unit of y axis of chart
+  $scope.chartUnitsYFilter = { name: "kWh", value: "kwh" };
+  $scope.labelsMonth = ["January", "February", "March", "April", "May", "June", "July"];
+  $scope.labelsWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  $scope.weekUsagePerRoom = [[2.34,4.02,3.11,3.43,2.99,3.88,4.04], //Bathroom
+    [1.94,3.02,2.09,2.27,1.85,2.73,3.01], //Bedroom
+    [0,0,0,0,0,0,0], //Bedroom (2nd)
+    [4.22,5.31,4.29,3.71,3.82,4.97,4.15], //Kitchen
+    [3.61,4.90,4.67,4.33,4.45,3.76,5.12], //Living room
+    [1.91,0.93,1.77,1.32,1.72,0.55,1.45] //Other
+  ];
+
+  var canvas = document.getElementById("canvas");
+  var ctx = canvas.getContext("2d");
+
+  var dat = {
+    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    datasets: [
+      {
+        label: "My First dataset",
+        fillColor: "rgba(220,220,220,0.2)",
+        strokeColor: "rgba(220,220,220,1)",
+        pointColor: "rgba(220,220,220,1)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(220,220,220,1)",
+        data: [65, 59, 80, 81, 56, 55, 40]
+      },
+      {
+        label: "My Second dataset",
+        fillColor: "rgba(151,187,205,0.2)",
+        strokeColor: "rgba(151,187,205,1)",
+        pointColor: "rgba(151,187,205,1)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(151,187,205,1)",
+        data: [28, 48, 40, 19, 86, 27, 90]
+      }
+    ]
+  };
+
+
+  var myNewChart = new Chart(ctx , {
+    type: "line",
+    data: dat,
+  });
+
+  $scope.updateChart = function () {
+    console.log('I am updating chart.');
+    console.log(chartUnitsY.value);
+    console.log(chartUnitsX.value);
+    console.log(document.getElementsByTagName("canvas"));
+    console.log(myNewChart.data.datasets[0].data);
+    for(var i = 0; i < myNewChart.data.datasets[0].data.length; i++) {
+      myNewChart.data.datasets[0].data[i] = myNewChart.data.datasets[0].data[i] * 0.12;
     }
+    console.log(myNewChart.data.datasets[0].data);
+    myNewChart.update();
+    myNewChart.data.labels = $scope.labelsWeek;
+    myNewChart.update();
+    //var canvas = document.getElementById('lineChart');
   };
 
 });
