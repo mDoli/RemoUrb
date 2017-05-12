@@ -43,7 +43,7 @@
       <canvas id="canvas"  />
     </div>
     <label class="item item-input item-select">
-      <div class="input-label" translate="SHOW_CONSUMPTION_BY"></div>
+      <div class="input-label" translate="TIME"></div>
       <select id="chartUnitsX" ng-model="chartUnitsXModel" ng-change="updateChart()">
         <option
           ng-repeat="unit in chartUnitsX"
@@ -54,7 +54,7 @@
       </select>
     </label>
     <label class="item item-input item-select">
-      <div class="input-label" translate="SHOW_CONSUMPTION_IN"></div>
+      <div class="input-label" translate="UNIT"></div>
       <select id="chartUnitsY" ng-model="chartUnitsYModel" ng-change="updateChart()">
         <option
           ng-repeat="unit in chartUnitsY"
@@ -65,7 +65,7 @@
       </select>
     </label>
     <label class="item item-input item-select">
-      <div class="input-label" translate="SHOW_CONSUMPTION_BY"></div>
+      <div class="input-label" translate="ROOM"></div>
       <select id="chartRooms" ng-model="chartRooms" ng-change="updateChart()">
         <option
           ng-repeat="aRoom in homeReadings"

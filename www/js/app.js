@@ -182,9 +182,12 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
       NAME: "Name",
       QUESTION_WHAT_LANGUAGE: "What is your language?",
       POINTS: "Points",
+      ROOM: "Room",
       SHOW_CONSUMPTION_BY: "Show consumption by",
       SHOW_CONSUMPTION_IN: "Show consumption in",
-      TEST: "Test"
+      TEST: "Test",
+      TIME: "Time",
+      UNIT: "Unit"
     });
     $translateProvider.translations('es', {
       AUTOREFRESHING: "Refrescante automática",

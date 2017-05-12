@@ -546,37 +546,70 @@ angular.module('starter.controllers', ['ionic']) //, 'ngCordova'
   // }
 
 
-  $scope.chartUnitsX = [ { name: "month", value: "m" }, { name: "day", value: "d" }, { name: "hour", value: "h" } ]; //unit of y axis of chart
+
+  $scope.chartUnitsX = [ { name: "hour", value: "h" }, { name: "day", value: "d" }, { name: "month", value: "m" } ]; //unit of y axis of chart
   $scope.chartUnitsXFilter = $scope.chartUnitsX[0];
   //document.getElementById("chartUnitsX").value = "month";
   $scope.chartUnitsY = [ { name: "Pound", value: "l" }, { name: "kWh", value: "kwh" } ]; //unit of y axis of chart
   $scope.chartUnitsYFilter = { name: "kWh", value: "kwh" };
-  $scope.labelsMonth = ["January", "February", "March", "April", "May", "June", "July"];
+  $scope.labelsMonthFull = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  $scope.labelsMonth = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   $scope.labelsWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  $scope.weekUsagePerRoom = [[2.34,4.02,3.11,3.43,2.99,3.88,4.04], //Bathroom
+  $scope.labelsHour = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23];
+  $scope.labelsDaysInMonth = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
+  $scope.usageDailyPerRoom = [[2.34,4.02,3.11,3.43,2.99,3.88,4.04], //Bathroom
     [1.94,3.02,2.09,2.27,1.85,2.73,3.01], //Bedroom
     [0,0,0,0,0,0,0], //Bedroom (2nd)
     [4.22,5.31,4.29,3.71,3.82,4.97,4.15], //Kitchen
     [3.61,4.90,4.67,4.33,4.45,3.76,5.12], //Living room
     [1.91,0.93,1.77,1.32,1.72,0.55,1.45] //Other
   ];
+  $scope.usageHourlyPerRoom = [[2.34,2.22,2.31,2.43,2.99,3.88,4.04,3.24,3.72,3.77,3.13,2.79,2.68,2.54,2.34,3.02,3.11,3.43,2.99,3.88,4.04,4.10,4.02,3.11], //Bathroom
+                                [1.94,3.02,2.09,2.27,1.85,2.73,3.01,1.94,3.02,2.09,2.27,1.85,2.73,3.01,1.94,3.02,2.09,2.27,1.85,2.73,3.01,1.94,3.02,2.09], //Bedroom
+                                [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], //Bedroom (2nd)
+                                [4.22,5.31,4.29,3.71,3.82,4.97,4.15,4.22,5.31,4.29,3.71,3.82,4.97,4.15,4.22,5.31,4.29,3.71,3.82,4.97,4.15,4.22,5.31,4.29], //Kitchen
+                                [3.61,4.90,4.67,4.33,4.45,3.76,5.12,3.61,4.90,4.67,4.33,4.45,3.76,5.12,3.61,4.90,4.67,4.33,4.45,3.76,5.12,3.61,4.90,4.67], //Living room
+                                [1.91,0.93,1.77,1.32,1.72,0.55,1.45,1.91,0.93,1.77,1.32,1.72,0.55,1.45,1.91,0.93,1.77,1.32,1.72,0.55,1.45,1.91,0.93,1.77] //Other
+    ];
+
+  $scope.usageDaysInMonthPerRoom = [[2.34,4.02,3.11,3.43,2.99,3.88,4.04,1.94,3.02,2.09,2.27,1.15,2.73,3.01,1.94,3.32,2.59,2.47,3.85,2.73,3.01,1.94,3.02,2.09,2.27,1.85,2.73,3.01,2.22,2.01,2.02], //Bathroom
+    [2.34,4.02,3.11,3.43,2.99,3.88,4.04,1.94,3.02,2.09,2.27,1.15,2.73,3.01,1.94,3.32,2.59,2.47,3.85,2.73,3.01,1.94,3.02,2.09,2.27,1.85,2.73,3.01,2.22,2.01,2.02], //Bedroom
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], //Bedroom (2nd)
+    [2.34,4.02,3.11,3.43,2.99,3.88,4.04,1.94,3.02,2.09,2.27,1.15,2.73,3.01,1.94,3.32,2.59,2.47,3.85,2.73,3.01,1.94,3.02,2.09,2.27,1.85,2.73,3.01,2.22,2.01,2.02], //Kitchen
+    [2.34,4.02,3.11,3.43,2.99,3.88,4.04,1.94,3.02,2.09,2.27,1.15,2.73,3.01,1.94,3.32,2.59,2.47,3.85,2.73,3.01,1.94,3.02,2.09,2.27,1.85,2.73,3.01,2.22,2.01,2.02], //Living room
+    [2.34,4.02,3.11,3.43,2.99,3.88,4.04,1.94,3.02,2.09,2.27,1.15,2.73,3.01,1.94,3.32,2.59,2.47,3.85,2.73,3.01,1.94,3.02,2.09,2.27,1.85,2.73,3.01,2.22,2.01,2.02] //Other
+  ];
+    // [0.0975,0.1675,0.12958,0.142916,0.12458,0.161666,0.16833,0.0975,0.1675,0.12958,0.142916,0.12458,0.161666,0.16833,0.0975,0.1675,0.12958,0.142916,0.12458,0.161666,0.16833,0.0975,0.1675,0.12958] //Bathroom
+    // [0.08083,0.12583,0.087083,0.094583,0.077083,0.11375,0.125416,0.080833,0.12583,0.087083,0.094583,0.077083,0.11375,0.125416,0.080833,0.12583,0.087083,0.094583,0.077083,0.11375,0.125416,0.080833,0.12583,0.087083] //Bedroom
+    // [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] //Bedroom(2nd)
+    // [0.17583,0.22125,0.17875,0.15458,0.159166,0.20708,0.172916,0.17583,0.22125,0.17875,0.15458,0.159166,0.20708,0.172916,0.17583,0.22125,0.17875,0.15458,0.159166,0.20708,0.172916,0.17583,0.22125,0.17875] //Kitchen
+    // [0.150416,0.204166,0.19458,0.180416,0.185416,0.156666,0.21333,0.150416,0.204166,0.19458,0.180416,0.185416,0.156666,0.21333,0.150416,0.204166,0.19458,0.180416,0.185416,0.156666,0.21333,0.150416,0.204166,0.19458] //Living room
+    // [0.079583,0.03875,0.07375,0.055,0.0716666,0.0229166,0.0604166,0.079583,0.03875,0.07375,0.055,0.0716666,0.0229166,0.0604166,0.079583,0.03875,0.07375,0.055,0.0716666,0.0229166,0.0604166,0.079583,0.03875,0.07375] //Other
+
+  $scope.poundsPerKwh = 0.12;
 
   var canvas = document.getElementById("canvas");
   var ctx = canvas.getContext("2d");
 
   var dat = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    //labels: ["January", "February", "March", "April", "May", "June", "July"],
+    labels: $scope.labelsWeek,
     datasets: [
       {
-        label: "My First dataset",
-        fillColor: "rgba(220,220,220,0.2)",
-        strokeColor: "rgba(220,220,220,1)",
+        label: "Bathroom consumption",
+        backgroundColor: "rgba(20,22,250,0.2)",
+        borderColor: "rgba(20,22,250,0.2)",
+        pointBorderColor: "rgba(20,22,220,0.82)",
+        fillColor: "rgba(22,22,220,0.2)",
+        strokeColor: "rgba(80,3,220,1)",
         pointColor: "rgba(220,220,220,1)",
         pointStrokeColor: "#fff",
         pointHighlightFill: "#fff",
-        pointHighlightStroke: "rgba(220,220,220,1)",
-        data: [65, 59, 80, 81, 56, 55, 40]
-      },
+        pointHighlightStroke: "rgba(220,220,0,1)",
+        //data: [65, 59, 80, 81, 56, 55, 40]
+        data: $scope.usageDailyPerRoom[0]
+      }
+      ,
       {
         label: "My Second dataset",
         fillColor: "rgba(151,187,205,0.2)",
@@ -585,31 +618,75 @@ angular.module('starter.controllers', ['ionic']) //, 'ngCordova'
         pointStrokeColor: "#fff",
         pointHighlightFill: "#fff",
         pointHighlightStroke: "rgba(151,187,205,1)",
-        data: [28, 48, 40, 19, 86, 27, 90]
+        data: [6, 9.5, 7.11, 6, 7.1, 8, 7.1]
       }
     ]
   };
-
 
   var myNewChart = new Chart(ctx , {
     type: "line",
     data: dat,
   });
 
+  //myNewChart.data.labels = $scope.labelsWeek;
+
+  $scope.getPricedValues = function (tab) {
+    var res = tab.slice()
+    // if((res === undefined) || (res[0] === undefined) || (res[0][0] === undefined)){
+    //   return;
+    // }
+    for(var i = 0; i < res.length; i++) {
+        res[i] = res[i] * $scope.poundsPerKwh;
+    }
+    console.log(tab);
+    console.log(res);
+    return res;
+  };
+  document.getElementById('chartUnitsX').value = 'day';
   $scope.updateChart = function () {
     console.log('I am updating chart.');
-    console.log(chartUnitsY.value);
-    console.log(chartUnitsX.value);
-    console.log(document.getElementsByTagName("canvas"));
-    console.log(myNewChart.data.datasets[0].data);
-    for(var i = 0; i < myNewChart.data.datasets[0].data.length; i++) {
-      myNewChart.data.datasets[0].data[i] = myNewChart.data.datasets[0].data[i] * 0.12;
+    //choose x axis unit
+    if(chartUnitsX.value === $scope.chartUnitsX[0].name ) { //hour
+        myNewChart.data.labels = $scope.labelsHour;
+        if(chartUnitsY.value === $scope.chartUnitsY[0].name) { //pound
+          console.log("case 1.1");
+          myNewChart.data.datasets[0].data = $scope.getPricedValues($scope.usageHourlyPerRoom[0]);
+        }
+        else if(chartUnitsY.value === $scope.chartUnitsY[1].name) { //kwh
+          console.log("case 1.2");
+          myNewChart.data.datasets[0].data = $scope.usageHourlyPerRoom[0];
+        }
     }
-    console.log(myNewChart.data.datasets[0].data);
+    else if(chartUnitsX.value === $scope.chartUnitsX[1].name) { //day (last week)
+      myNewChart.data.labels = $scope.labelsWeek;
+      if(chartUnitsY.value === $scope.chartUnitsY[0].name) { //pound
+        console.log("case 2.1");
+        myNewChart.data.datasets[0].data = $scope.getPricedValues($scope.usageDailyPerRoom[0]);
+      }
+      else if(chartUnitsY.value === $scope.chartUnitsY[1].name) { //kwh
+        console.log("case 2.2");
+        myNewChart.data.datasets[0].data = $scope.usageDailyPerRoom[0];
+      }
+    }
+    else if(chartUnitsX.value === $scope.chartUnitsX[2].name) { //day (in month)
+      myNewChart.data.labels = $scope.labelsDaysInMonth;
+      if(chartUnitsY.value === $scope.chartUnitsY[0].name) { //pound
+        console.log("case 3.1");
+        myNewChart.data.datasets[0].data = $scope.getPricedValues($scope.usageDaysInMonthPerRoom[0]);
+      }
+      else if(chartUnitsY.value === $scope.chartUnitsY[1].name) { //kwh
+        console.log("case 3.2");
+        myNewChart.data.datasets[0].data = $scope.usageDaysInMonthPerRoom[0];
+      }
+    }
+    console.log(Date.now());
+    console.log(Date);
+    console.log(Date.prototype.getTime());
+    console.log(Date.prototype.getHours());
+    console.log(Date.prototype.getYear());
+    console.log(Date.prototype.getFullYear());
+    //myNewChart.data.datasets[1].data.setVisible(false);
     myNewChart.update();
-    myNewChart.data.labels = $scope.labelsWeek;
-    myNewChart.update();
-    //var canvas = document.getElementById('lineChart');
   };
 
 });
